@@ -15,5 +15,7 @@ public static class ServiceCollectionExtensions
                 var options = svp.GetRequiredService<IOptions<LlmSettings>>();
                 client.BaseAddress = new Uri(options.Value.Url);
             });
+
+        services.AddSingleton<OllamaClient>();
     }
 }

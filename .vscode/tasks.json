@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Web",
+            "command": "dotnet",
+            "type": "shell",
+            "args": ["build", "Llamanager.Web"],
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "build"
+        },
+        
+    ]
+}

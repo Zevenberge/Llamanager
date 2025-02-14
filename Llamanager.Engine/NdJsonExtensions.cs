@@ -10,8 +10,9 @@ public static class NdJsonExtensions
         using var stream = await content.ReadAsStreamAsync(cancellationToken);
         var reader = new StreamReader(stream);
         var line = await reader.ReadLineAsync(cancellationToken);
-        while(!string.IsNullOrEmpty(line))
+        while(!reader.EndOfStream)
         {
+            if(string.IsNullOrEmpty(line)) continue;
             yield return JsonSerializer.Deserialize<T>(line)!;
             line = await reader.ReadLineAsync(cancellationToken);
         }
