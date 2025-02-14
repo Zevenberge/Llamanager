@@ -2,7 +2,7 @@ using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Options;
 
-namespace Llamamanager.Engine;
+namespace Llamanager.Engine;
 
 public class OllamaClient(IHttpClientFactory httpClientFactory, IOptions<LlmSettings> options)
 {

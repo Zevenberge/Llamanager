@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Llamamanager.Engine;
+namespace Llamanager.Engine;
 
 public static class ServiceCollectionExtensions
 {

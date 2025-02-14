@@ -1,4 +1,4 @@
-﻿namespace Llamamanager.Engine;
+﻿namespace Llamanager.Engine;
 
 public class LlmSettings
 {

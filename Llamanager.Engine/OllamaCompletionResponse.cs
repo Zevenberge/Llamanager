@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Llamamanager.Engine;
+namespace Llamanager.Engine;
 
 internal record OllamaCompletionResponse(string Model, 
     [property: JsonPropertyName("created_at")]

@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-namespace Llamamanager.Engine;
+namespace Llamanager.Engine;
 
 public static class NdJsonExtensions
 {
