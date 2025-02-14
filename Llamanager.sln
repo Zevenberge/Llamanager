@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Llamanager.Engine", "Llamanager.Engine\Llamanager.Engine.csproj", "{ECD9638A-E20C-43B6-87D7-F5686CDA946F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Llamanager.Web", "Llamanager.Web\Llamanager.Web.csproj", "{DCDBA9D1-BDF5-4878-89C3-190EC0F6A11B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECD9638A-E20C-43B6-87D7-F5686CDA946F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECD9638A-E20C-43B6-87D7-F5686CDA946F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECD9638A-E20C-43B6-87D7-F5686CDA946F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECD9638A-E20C-43B6-87D7-F5686CDA946F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCDBA9D1-BDF5-4878-89C3-190EC0F6A11B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCDBA9D1-BDF5-4878-89C3-190EC0F6A11B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCDBA9D1-BDF5-4878-89C3-190EC0F6A11B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCDBA9D1-BDF5-4878-89C3-190EC0F6A11B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
