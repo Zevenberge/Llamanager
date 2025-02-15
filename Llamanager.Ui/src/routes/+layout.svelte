@@ -15,19 +15,12 @@
 		ignore?: boolean;
     };
 
-	let ticketSource = $state(data.source);
-	
-    const navigations: NavigationEntry[] = $derived([
+    const navigations: NavigationEntry[] = [
         { description: "Home", icon: mdiHomeOutline, path: "/", requireSeperator: true },
-        { description: "Tickets", icon: mdiClipboardCheckMultipleOutline, path: "/tickets", ignore: ticketSource != SELF_CONTAINED },
+        { description: "Tickets", icon: mdiClipboardCheckMultipleOutline, path: "/tickets", ignore: data.source != SELF_CONTAINED },
         { description: "Releases", icon: mdiPackageVariantClosed, path: "/releases" },
         { description: "Agent", icon: mdiRobotConfusedOutline, path: "/agent", requireSeperator: true },
-    ]);
-	
-	onMount(async () => {
-		const response = await getTicketSource();
-		ticketSource = response.source;
-	});
+    ];
 </script>
 
 <div class="drawer-container">
