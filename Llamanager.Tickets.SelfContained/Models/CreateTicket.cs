@@ -2,7 +2,7 @@ using Llamanager.Tickets.SelfContained.Domain;
 
 namespace Llamanager.Tickets.SelfContained.Models;
 
-internal record CreateTicket(
+public record CreateTicket(
     TicketType Type, 
     string Summary, 
     string? Description, 

@@ -1,6 +1,6 @@
 namespace Llamanager.Tickets.SelfContained.Domain;
 
-internal enum TicketType
+public enum TicketType
 {
     Rfc,
     Bug,

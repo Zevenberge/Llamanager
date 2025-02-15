@@ -1,13 +1,14 @@
 using Llamanager.Tickets.SelfContained.Domain;
 using Llamanager.Tickets.SelfContained.Models;
 using Llamanager.Tickets.SelfContained.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Llamanager.Tickets.SelfContained.Controllers;
 
 [ApiController]
 [Route("/llama/ticket")]
-internal class LlamaTicketController(LlamaTicketRepository ticketRepository) : ControllerBase
+public class LlamaTicketController(ILlamaTicketRepository ticketRepository) : ControllerBase
 {
     [HttpGet]
     [Route("")]
@@ -85,6 +86,22 @@ internal class LlamaTicketController(LlamaTicketRepository ticketRepository) : C
             return NotFound();
         }
         ticket.UpdateStatus(updateStatus.Status);
+        await ticketRepository.Update(ticket, cancellationToken);
+        return Ok(new Ticket(ticket));
+    }
+    
+    [HttpPut]
+    [Route("{id}/type")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Ticket))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(void))]
+    public async Task<IActionResult> UpdateTicketType([FromQuery] string id, [FromBody] UpdateTicketType updateTicketType, CancellationToken cancellationToken)
+    {
+        var ticket = await ticketRepository.Get(id, cancellationToken);
+        if(ticket == null)
+        {
+            return NotFound();
+        }
+        ticket.ChangeTicketType(updateTicketType.Type);
         await ticketRepository.Update(ticket, cancellationToken);
         return Ok(new Ticket(ticket));
     }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Llamanager.Web.Controllers;
 
 [Route("/sse")]
+[ApiExplorerSettings(IgnoreApi = true)]
 public class SseController(SseSessionPool sseSessionPool): ControllerBase
 {
     [HttpGet]

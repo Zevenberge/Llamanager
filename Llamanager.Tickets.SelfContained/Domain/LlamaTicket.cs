@@ -2,7 +2,7 @@
 
 namespace Llamanager.Tickets.SelfContained.Domain;
 
-internal class LlamaTicket : ITicket
+public class LlamaTicket : ITicket
 {
     private LlamaTicket() { }
     public string Id { get; private set; } = default!;
@@ -36,5 +36,10 @@ internal class LlamaTicket : ITicket
     public void UpdateStatus(Status status)
     {
         Status = status;
+    }
+
+    public void ChangeTicketType(TicketType ticketType)
+    {
+        Type = ticketType;
     }
 }

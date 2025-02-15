@@ -1,6 +1,6 @@
 namespace Llamanager.Tickets.SelfContained.Models;
 
-internal record UpdateTicket(
+public record UpdateTicket(
     string Summary, 
     string? Description, 
     string? AcceptanceCriteria

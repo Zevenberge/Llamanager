@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Llamanager.Engine\Llamanager.Engine.csproj" />
+    <ProjectReference Include="..\Llamanager.Tickets.SelfContained\Llamanager.Tickets.SelfContained.csproj" />
   </ItemGroup>
 
 </Project>

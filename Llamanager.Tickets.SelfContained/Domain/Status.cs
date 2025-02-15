@@ -1,6 +1,6 @@
 namespace Llamanager.Tickets.SelfContained.Domain;
 
-internal enum Status
+public enum Status
 {
     Open,
     InProgress,

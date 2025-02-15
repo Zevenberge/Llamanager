@@ -1,36 +1,43 @@
 using Llamanager.Tickets.SelfContained.Domain;
+using Raven.Client.Documents;
+using Raven.Client.Documents.Session;
 
 namespace Llamanager.Tickets.SelfContained.Repository;
 
-internal class LlamaTicketRepository
+public interface ILlamaTicketRepository
 {
-    // TODO: use persistent backing storage.
-    private List<LlamaTicket> _tickets = [];
+    Task Add(LlamaTicket ticket, CancellationToken cancellationToken);
+    Task Delete(LlamaTicket ticket, CancellationToken cancellationToken);
+    Task<LlamaTicket?> Get(string id, CancellationToken cancellationToken);
+    Task<List<LlamaTicket>> GetAll(CancellationToken cancellationToken);
+    Task Update(LlamaTicket ticket, CancellationToken cancellationToken);
+}
 
-    public Task<LlamaTicket?> Get(string id, CancellationToken cancellationToken)
+internal class LlamaTicketRepository(IAsyncDocumentSession session) : ILlamaTicketRepository
+{
+    public async Task<LlamaTicket?> Get(string id, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_tickets.FirstOrDefault(t => t.Id == id));
+        return await session.LoadAsync<LlamaTicket>(id, cancellationToken);
     }
 
-    public Task<List<LlamaTicket>> GetAll(CancellationToken cancellationToken)
+    public async Task<List<LlamaTicket>> GetAll(CancellationToken cancellationToken)
     {
-        return Task.FromResult(_tickets);
+        return await session.Query<LlamaTicket>().ToListAsync(cancellationToken);
     }
 
-    public Task Add(LlamaTicket ticket, CancellationToken cancellationToken)
+    public async Task Add(LlamaTicket ticket, CancellationToken cancellationToken)
     {
-        _tickets.Add(ticket);
-        return Task.CompletedTask;
+        await session.StoreAsync(ticket, cancellationToken);
     }
 
-    public Task Update(LlamaTicket ticket, CancellationToken cancellationToken)
+    public async Task Update(LlamaTicket ticket, CancellationToken cancellationToken)
     {
-        // NO-OP for in-memory storage.
-        return Task.CompletedTask;
+        await session.StoreAsync(ticket, cancellationToken);
     }
 
     public Task Delete(LlamaTicket ticket, CancellationToken cancellationToken)
     {
+        session.Delete(ticket.Id);
         return Task.CompletedTask;
     }
 }
