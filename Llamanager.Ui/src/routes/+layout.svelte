@@ -4,21 +4,30 @@
 	import { Icon } from '@smui/button';
 	import List, { Item, Text, Graphic, Separator } from '@smui/list';
     import { mdiClipboardCheckMultipleOutline, mdiPackageVariantClosed, mdiRobotConfusedOutline, mdiHomeOutline } from "@mdi/js"
+	import { getTicketSource, SELF_CONTAINED } from '$lib/models/ticketSource';
+	import { onMount } from 'svelte';
 	let { children } = $props();
     type NavigationEntry = {
         description: string;
         icon: string;
         path: string;
         requireSeperator?: boolean;
+		ignore?: boolean;
     };
 
-    const navigations: NavigationEntry[] = [
+	let ticketSource = $state("unknown");
+	
+    const navigations: NavigationEntry[] = $derived([
         { description: "Home", icon: mdiHomeOutline, path: "/", requireSeperator: true },
-        { description: "Tickets", icon: mdiClipboardCheckMultipleOutline, path: "/tickets" },
+        { description: "Tickets", icon: mdiClipboardCheckMultipleOutline, path: "/tickets", ignore: ticketSource != SELF_CONTAINED },
         { description: "Releases", icon: mdiPackageVariantClosed, path: "/releases" },
         { description: "Agent", icon: mdiRobotConfusedOutline, path: "/agent", requireSeperator: true },
-    ]
-
+    ]);
+	
+	onMount(async () => {
+		const response = await getTicketSource();
+		ticketSource = response.source;
+	});
 </script>
 
 <div class="drawer-container">
@@ -29,7 +38,7 @@
 		</Header>
 		<Content>
 			<List>
-                {#each navigations as nav}
+                {#each navigations.filter(n => !n.ignore) as nav}
                     {#if nav.requireSeperator }
                         <Separator/>
                     {/if}
