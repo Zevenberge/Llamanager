@@ -6,7 +6,7 @@ Start the RavenDb container
 ```bash
 docker run -p 8080:8080 -p 38888:38888 -v Data:/var/lib/ravendb/data --name llama-ravendb -e RAVEN_Setup_Mode=None -e RAVEN_License_Eula_Accepted=true -e RAVEN_Security_UnsecuredAccessAllowed=PrivateNetwork ravendb/ravendb
 ```
-Storage is mounted to a local `Data` directory.
+Storage is mounted to a local `Data` directory. Initially, you will need to create a database named `Llamanager` in the RavenDB UI at `http://localhost:8080`. You can use a different name if you change the name in the appsettings as well.
 
 Start the Ollama container
 ```bash

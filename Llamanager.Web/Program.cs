@@ -9,11 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddLlm(options => builder.Configuration.GetSection("Llm").Bind(options));
 
 builder.Services.AddSingleton<SseSessionPool>();
-builder.Services.AddSingleton<IDocumentStore>(new DocumentStore
+builder.Services.AddSingleton(new DocumentStore
 {
     Urls = [ builder.Configuration["Database:Url"] ],
     Database = builder.Configuration["Database:Name"],
-});
+}.Initialize());
 builder.Services.AddScoped(svp =>
 {
     return svp.GetRequiredService<IDocumentStore>().OpenAsyncSession();
