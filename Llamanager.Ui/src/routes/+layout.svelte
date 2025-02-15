@@ -6,7 +6,7 @@
     import { mdiClipboardCheckMultipleOutline, mdiPackageVariantClosed, mdiRobotConfusedOutline, mdiHomeOutline } from "@mdi/js"
 	import { getTicketSource, SELF_CONTAINED } from '$lib/models/ticketSource';
 	import { onMount } from 'svelte';
-	let { children } = $props();
+	let { data, children } = $props();
     type NavigationEntry = {
         description: string;
         icon: string;
@@ -15,7 +15,7 @@
 		ignore?: boolean;
     };
 
-	let ticketSource = $state("unknown");
+	let ticketSource = $state(data.source);
 	
     const navigations: NavigationEntry[] = $derived([
         { description: "Home", icon: mdiHomeOutline, path: "/", requireSeperator: true },

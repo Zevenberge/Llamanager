@@ -2,8 +2,8 @@ export type Appsettings = {
     serverUrl: string;
 }
 
-export async function getAppsettings() {
-    const response = await fetch("/appsettings.json");
+export async function getAppsettings(fetch?: typeof globalThis.fetch) {
+    const response = await (fetch ?? globalThis.fetch)("/appsettings.json");
     if(response.ok) {
         return await response.json() as Appsettings;
     }
