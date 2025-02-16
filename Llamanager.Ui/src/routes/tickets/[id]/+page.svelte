@@ -10,9 +10,6 @@
 	import Menu from '@smui/menu';
 	let { data } = $props();
 	let menu: Menu;
-
-	let anchor: HTMLDivElement | undefined = $state();
-	let anchorClasses: { [k: string]: boolean } = $state({});
 </script>
 
 <div class="aligned-line front-and-back">
@@ -21,22 +18,7 @@
 		<LlamaTicketStatusLight status={data.status} />
 		<span>{data.number} - {data.summary}</span>
 	</h1>
-	<div
-		class={Object.keys(anchorClasses).join(' ')}
-		use:Anchor={{
-			addClass: (className) => {
-				if (!anchorClasses[className]) {
-					anchorClasses[className] = true;
-				}
-			},
-			removeClass: (className) => {
-				if (anchorClasses[className]) {
-					delete anchorClasses[className];
-				}
-			}
-		}}
-		bind:this={anchor}
-	>
+	<div>
 		<IconButton onclick={() => menu.setOpen(true)}>
 			<ActionsIcon />
 		</IconButton>
