@@ -1,18 +1,62 @@
 <script lang="ts">
+	import ActionsIcon from '$lib/components/ActionsIcon.svelte';
 	import EditIcon from '$lib/components/EditIcon.svelte';
 	import LlamaTicketStatusLight from '$lib/components/llama-tickets/LlamaTicketStatusLight.svelte';
-    import LlamaTicketTypeIcon from '$lib/components/llama-tickets/LlamaTicketTypeIcon.svelte';
+	import LlamaTicketTypeIcon from '$lib/components/llama-tickets/LlamaTicketTypeIcon.svelte';
 	import { LLAMA_TICKETS_FRONT_END_PATH } from '$lib/models/llamaTickets.js';
 	import Fab from '@smui/fab';
-    let { data } = $props();
+	import IconButton from '@smui/icon-button';
+	import List, { Item, Text, Separator } from '@smui/list';
+	import Menu from '@smui/menu';
+	let { data } = $props();
+	let menu: Menu;
+
+	let anchor: HTMLDivElement | undefined = $state();
+	let anchorClasses: { [k: string]: boolean } = $state({});
 </script>
 
-<h1 class="aligned-line">
-    <LlamaTicketTypeIcon ticketType={data.ticketType} class="compact-icon" /> 
-    <LlamaTicketStatusLight status={data.status} />
-    <span>{data.number} - {data.summary}</span>
-</h1>
+<div class="aligned-line front-and-back">
+	<h1 class="aligned-line">
+		<LlamaTicketTypeIcon ticketType={data.ticketType} class="compact-icon" />
+		<LlamaTicketStatusLight status={data.status} />
+		<span>{data.number} - {data.summary}</span>
+	</h1>
+	<div
+		class={Object.keys(anchorClasses).join(' ')}
+		use:Anchor={{
+			addClass: (className) => {
+				if (!anchorClasses[className]) {
+					anchorClasses[className] = true;
+				}
+			},
+			removeClass: (className) => {
+				if (anchorClasses[className]) {
+					delete anchorClasses[className];
+				}
+			}
+		}}
+		bind:this={anchor}
+	>
+		<IconButton onclick={() => menu.setOpen(true)}>
+			<ActionsIcon />
+		</IconButton>
+		<Menu bind:this={menu}>
+			<List>
+				<Item onSMUIAction={() => {}}>
+					<Text>Update status</Text>
+				</Item>
+				<Item onSMUIAction={() => {}}>
+					<Text>Change ticket type</Text>
+				</Item>
+				<Separator />
 
+				<Item onSMUIAction={() => {}}>
+					<Text>Delete</Text>
+				</Item>
+			</List>
+		</Menu>
+	</div>
+</div>
 <h2>Description:</h2>
 
 <p class="multiline">{data.description}</p>
@@ -22,5 +66,5 @@
 <p class="multiline">{data.acceptanceCriteria}</p>
 
 <Fab color="primary" href="{LLAMA_TICKETS_FRONT_END_PATH}/{encodeURIComponent(data.id)}/edit">
-	<EditIcon/>
+	<EditIcon />
 </Fab>

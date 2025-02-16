@@ -52,6 +52,10 @@
     align-items: center;
 }
 
+.aligned-line.front-and-back {
+    justify-content: space-between;
+}
+
 .multiline {
     white-space: pre-line;
 }
