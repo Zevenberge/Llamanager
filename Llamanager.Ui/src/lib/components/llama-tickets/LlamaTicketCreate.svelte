@@ -22,7 +22,7 @@
 <div class="short-radio-list">
 	{#each ticketTypeOptions as option}
 		<FormField>
-			<Radio bind:group={ticket.ticketType} value={option} />
+			<Radio bind:group={ticket.type} value={option} />
 			{#snippet label()}
 				<LlamaTicketTypeIcon ticketType={option} />
 				<span>

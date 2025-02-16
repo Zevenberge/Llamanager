@@ -6,6 +6,7 @@
     import { mdiClipboardCheckMultipleOutline, mdiPackageVariantClosed, mdiRobotConfusedOutline, mdiHomeOutline } from "@mdi/js"
 	import { SELF_CONTAINED } from '$lib/models/ticketSource';
 	import { exactRoute, isInSection, type RouteComparer } from '$lib/models/routing.js';
+	import { LLAMA_TICKETS_FRONT_END_PATH } from '$lib/models/llamaTickets.js';
 	let { data, children } = $props();
     type NavigationEntry = {
         description: string;
@@ -18,7 +19,7 @@
 
     const navigations: NavigationEntry[] = [
         { description: "Home", icon: mdiHomeOutline, path: "/", isActive: exactRoute, requireSeperator: true },
-        { description: "Tickets", icon: mdiClipboardCheckMultipleOutline, path: "/tickets", isActive: isInSection, ignore: data.source != SELF_CONTAINED },
+        { description: "Tickets", icon: mdiClipboardCheckMultipleOutline, path: LLAMA_TICKETS_FRONT_END_PATH, isActive: isInSection, ignore: data.source != SELF_CONTAINED },
         { description: "Releases", icon: mdiPackageVariantClosed, path: "/releases", isActive: isInSection },
         { description: "Agent", icon: mdiRobotConfusedOutline, path: "/agent", isActive: isInSection, requireSeperator: true },
     ];

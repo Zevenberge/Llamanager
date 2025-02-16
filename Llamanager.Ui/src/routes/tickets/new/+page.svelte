@@ -6,7 +6,7 @@
 	import Fab from "@smui/fab";
 
     let ticket: CreateLlamaTicket = {
-        ticketType: 'Rfc',
+        type: 'Rfc',
         summary: '',
         description: '',
         acceptanceCriteria: '',

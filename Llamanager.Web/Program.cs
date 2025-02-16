@@ -3,7 +3,6 @@ using Llamanager.Engine;
 using Llamanager.Tickets.SelfContained;
 using Llamanager.Web;
 using Raven.Client.Documents;
-using Raven.Client.Documents.Session;
 
 var builder = WebApplication.CreateBuilder(args);
 

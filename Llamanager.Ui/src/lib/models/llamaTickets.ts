@@ -3,6 +3,8 @@ import { fetchBackend, post } from "$lib/backend";
 
 const PATH = "/llama/ticket"
 
+export const LLAMA_TICKETS_FRONT_END_PATH = "/tickets";
+
 export type LlamaTicketType = "Rfc" | "Bug";
 export type LlamaTicketStatus = "Open" | "InProgress" | "Resolved" | "Closed";
 
@@ -16,7 +18,13 @@ export type LlamaTicket = {
     acceptanceCriteria: string | null;
 }
 
-export type CreateLlamaTicket = Omit<LlamaTicket, 'id' | 'number' | 'status'>;
+export function numberToCompare(ticket: LlamaTicket) {
+    return +(ticket.number.substring(0, ticket.number.length - 2));
+}
+
+export type CreateLlamaTicket = Omit<LlamaTicket, 'id' | 'number' | 'status' | 'ticketType'> & {
+    type: LlamaTicketType
+};
 
 export async function getAllLlamaTickets() {
     const result = await fetchBackend(PATH);
@@ -43,5 +51,5 @@ export async function createLlamaTicket(ticket: CreateLlamaTicket) {
 }
 
 export function navigateToLlamaTicket(ticket: LlamaTicket) {
-    goto(`/tickets/${encodeURIComponent(ticket.id)}`);
+    goto(`${LLAMA_TICKETS_FRONT_END_PATH}/${encodeURIComponent(ticket.id)}`);
 }

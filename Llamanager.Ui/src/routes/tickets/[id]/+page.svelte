@@ -7,15 +7,13 @@
 <h1 class="aligned-line">
     <LlamaTicketTypeIcon ticketType={data.ticketType} class="compact-icon" /> 
     <LlamaTicketStatusLight status={data.status} />
-    <span>{data.number}</span>
+    <span>{data.number} - {data.summary}</span>
 </h1>
 
-<h2>{data.summary}</h2>
-
-<h3>Description:</h3>
+<h2>Description:</h2>
 
 <p class="multiline">{data.description}</p>
 
-<h3>Acceptance criteria:</h3>
+<h2>Acceptance criteria:</h2>
 
 <p class="multiline">{data.acceptanceCriteria}</p>

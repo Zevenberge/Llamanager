@@ -51,7 +51,7 @@ public class LlamaTicketController(ILlamaTicketRepository ticketRepository) : Co
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(void))]
     public async Task<IActionResult> Update([FromQuery] string id, [FromBody] UpdateTicket updateTicket, CancellationToken cancellationToken)
     {
-        var ticket = await ticketRepository.Get(id, cancellationToken);
+        var ticket = await ticketRepository.Get(WebUtility.UrlDecode(id), cancellationToken);
         if(ticket == null)
         {
             return NotFound();
@@ -67,7 +67,7 @@ public class LlamaTicketController(ILlamaTicketRepository ticketRepository) : Co
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(void))]
     public async Task<IActionResult> Delete([FromQuery] string id, CancellationToken cancellationToken)
     {
-        var ticket = await ticketRepository.Get(id, cancellationToken);
+        var ticket = await ticketRepository.Get(WebUtility.UrlDecode(id), cancellationToken);
         if(ticket == null)
         {
             return NotFound();
@@ -82,7 +82,7 @@ public class LlamaTicketController(ILlamaTicketRepository ticketRepository) : Co
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(void))]
     public async Task<IActionResult> UpdateStatus([FromQuery] string id, [FromBody] UpdateStatus updateStatus, CancellationToken cancellationToken)
     {
-        var ticket = await ticketRepository.Get(id, cancellationToken);
+        var ticket = await ticketRepository.Get(WebUtility.UrlDecode(id), cancellationToken);
         if(ticket == null)
         {
             return NotFound();
@@ -98,7 +98,7 @@ public class LlamaTicketController(ILlamaTicketRepository ticketRepository) : Co
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(void))]
     public async Task<IActionResult> UpdateTicketType([FromQuery] string id, [FromBody] UpdateTicketType updateTicketType, CancellationToken cancellationToken)
     {
-        var ticket = await ticketRepository.Get(id, cancellationToken);
+        var ticket = await ticketRepository.Get(WebUtility.UrlDecode(id), cancellationToken);
         if(ticket == null)
         {
             return NotFound();
