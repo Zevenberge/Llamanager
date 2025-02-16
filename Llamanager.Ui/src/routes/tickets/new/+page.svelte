@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { goto } from "$app/navigation";
 	import LlamaTicketCreate from "$lib/components/llama-tickets/LlamaTicketCreate.svelte";
 	import SaveIcon from "$lib/components/SaveIcon.svelte";
-	import { createLlamaTicket, type CreateLlamaTicket } from "$lib/models/llamaTickets";
+	import { createLlamaTicket, navigateToLlamaTicket, type CreateLlamaTicket } from "$lib/models/llamaTickets";
 	import { currentNotification } from "$lib/models/snackbar";
 	import Fab from "@smui/fab";
 
@@ -24,7 +23,7 @@
                 message: "Successfully created ticket",
                 type: "success"
             });
-            await goto(`/tickets/${createdTicket.id}`);
+            navigateToLlamaTicket(createdTicket);
         } catch {
             currentNotification.set({ 
                 message: "Failed to create ticket",

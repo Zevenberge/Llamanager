@@ -1,7 +1,5 @@
 <script lang="ts">
-	import type { LlamaTicket } from "$lib/models/llamaTickets";
-    import { mdiBugOutline, mdiStarCircleOutline } from '@mdi/js';
-	import { Icon } from '@smui/button';
+	import { navigateToLlamaTicket, type LlamaTicket } from "$lib/models/llamaTickets";
 	import DataTable, { Body, Cell, Head, Row } from '@smui/data-table';
 	import LinearProgress from '@smui/linear-progress';
 	import LlamaTicketTypeIcon from "./LlamaTicketTypeIcon.svelte";
@@ -19,9 +17,9 @@
 	</Head>
 	<Body>
 		{#each tickets as ticket (ticket.id)}
-			<Row>
+			<Row onclick={() => navigateToLlamaTicket(ticket)}>
 				<Cell>
-					<LlamaTicketTypeIcon ticketType={ticket.ticketType} />	
+					<LlamaTicketTypeIcon ticketType={ticket.ticketType} class="compact-icon"/>	
 				</Cell>
 				<Cell numeric>{ticket.number}</Cell>
 				<Cell>{ticket.summary}</Cell>

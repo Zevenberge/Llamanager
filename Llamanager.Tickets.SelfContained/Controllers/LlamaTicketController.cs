@@ -1,3 +1,5 @@
+using System.Net;
+using System.Text.Encodings.Web;
 using Llamanager.Tickets.SelfContained.Domain;
 using Llamanager.Tickets.SelfContained.Models;
 using Llamanager.Tickets.SelfContained.Repository;
@@ -23,9 +25,9 @@ public class LlamaTicketController(ILlamaTicketRepository ticketRepository) : Co
     [Route("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Ticket))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(void))]
-    public async Task<IActionResult> Get(string id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Get([FromRoute] string id, CancellationToken cancellationToken)
     {
-        var ticket = await ticketRepository.Get(id, cancellationToken);
+        var ticket = await ticketRepository.Get(WebUtility.UrlDecode(id), cancellationToken);
         if (ticket != null)
         {
             return Ok(new Ticket(ticket));

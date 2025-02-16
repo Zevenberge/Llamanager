@@ -39,6 +39,23 @@
     flex-shrink: 0;
 }
 
+.compact-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.aligned-line {
+    display: flex;
+    flex-direction: row;
+    gap: 0.3em;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.multiline {
+    white-space: pre-line;
+}
+
 form {
     display: flex;
     flex-direction: column;

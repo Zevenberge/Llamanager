@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Llamanager.Engine;
 using Llamanager.Tickets.SelfContained;
 using Llamanager.Web;
@@ -19,7 +20,12 @@ builder.Services.AddScoped(svp =>
     return svp.GetRequiredService<IDocumentStore>().OpenAsyncSession();
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(opts =>
+    {
+        var enumConverter = new JsonStringEnumConverter();
+        opts.JsonSerializerOptions.Converters.Add(enumConverter);
+    });
 var ticketSource = builder.Configuration.TicketSource();
 if(ticketSource == "llamanager")
 {
