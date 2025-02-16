@@ -42,7 +42,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors(policy => 
-    policy.SetIsOriginAllowed(origin => origin == app.Configuration.Frontend())
+    policy
+        .SetIsOriginAllowed(origin => origin == app.Configuration.Frontend())
+        .AllowAnyHeader()
 );
 app.UseTransactions();
 app.MapControllers();

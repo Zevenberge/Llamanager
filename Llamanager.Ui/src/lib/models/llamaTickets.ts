@@ -1,4 +1,4 @@
-import { fetchBackend } from "$lib/backend";
+import { fetchBackend, post } from "$lib/backend";
 
 const PATH = "/llama/ticket"
 
@@ -21,4 +21,12 @@ export async function getAllLlamaTickets() {
         return await result.json() as LlamaTicket[];
     }
     throw new Error("Could not load tickets");
+}
+
+export async function createLlamaTicket(ticket: CreateLlamaTicket) {
+    const result = await fetchBackend(PATH, post(ticket));
+    if(result.ok) {
+        return await result.json() as LlamaTicket;
+    }
+    throw new Error("Could not create ticket");
 }
