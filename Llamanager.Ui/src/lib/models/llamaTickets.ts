@@ -1,5 +1,5 @@
 import { goto } from "$app/navigation";
-import { fetchBackend, post } from "$lib/backend";
+import { fetchBackend, post, put } from "$lib/backend";
 
 const PATH = "/llama/ticket"
 
@@ -22,7 +22,8 @@ export function numberToCompare(ticket: LlamaTicket) {
     return +(ticket.number.substring(0, ticket.number.length - 2));
 }
 
-export type CreateLlamaTicket = Omit<LlamaTicket, 'id' | 'number' | 'status' | 'ticketType'> & {
+export type UpdateLlamaTicket = Omit<LlamaTicket, 'id' | 'number' | 'status' | 'ticketType'>;
+export type CreateLlamaTicket = UpdateLlamaTicket & {
     type: LlamaTicketType
 };
 
@@ -44,6 +45,14 @@ export async function getLlamaTicket(id: string, fetch?: typeof globalThis.fetch
 
 export async function createLlamaTicket(ticket: CreateLlamaTicket) {
     const result = await fetchBackend(PATH, post(ticket));
+    if(result.ok) {
+        return await result.json() as LlamaTicket;
+    }
+    throw new Error("Could not create ticket");
+}
+
+export async function updateLlamaTicket(id: string, ticket: UpdateLlamaTicket) {
+    const result = await fetchBackend(`${PATH}/${encodeURIComponent(id)}`, put(ticket));
     if(result.ok) {
         return await result.json() as LlamaTicket;
     }

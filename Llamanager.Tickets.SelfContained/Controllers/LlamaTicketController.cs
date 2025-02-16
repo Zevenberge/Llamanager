@@ -49,7 +49,7 @@ public class LlamaTicketController(ILlamaTicketRepository ticketRepository) : Co
     [Route("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Ticket))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(void))]
-    public async Task<IActionResult> Update([FromQuery] string id, [FromBody] UpdateTicket updateTicket, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update([FromRoute] string id, [FromBody] UpdateTicket updateTicket, CancellationToken cancellationToken)
     {
         var ticket = await ticketRepository.Get(WebUtility.UrlDecode(id), cancellationToken);
         if(ticket == null)
@@ -65,7 +65,7 @@ public class LlamaTicketController(ILlamaTicketRepository ticketRepository) : Co
     [Route("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(void))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(void))]
-    public async Task<IActionResult> Delete([FromQuery] string id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Delete([FromRoute] string id, CancellationToken cancellationToken)
     {
         var ticket = await ticketRepository.Get(WebUtility.UrlDecode(id), cancellationToken);
         if(ticket == null)
@@ -80,7 +80,7 @@ public class LlamaTicketController(ILlamaTicketRepository ticketRepository) : Co
     [Route("{id}/status")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Ticket))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(void))]
-    public async Task<IActionResult> UpdateStatus([FromQuery] string id, [FromBody] UpdateStatus updateStatus, CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdateStatus([FromRoute] string id, [FromBody] UpdateStatus updateStatus, CancellationToken cancellationToken)
     {
         var ticket = await ticketRepository.Get(WebUtility.UrlDecode(id), cancellationToken);
         if(ticket == null)
@@ -96,7 +96,7 @@ public class LlamaTicketController(ILlamaTicketRepository ticketRepository) : Co
     [Route("{id}/type")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Ticket))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(void))]
-    public async Task<IActionResult> UpdateTicketType([FromQuery] string id, [FromBody] UpdateTicketType updateTicketType, CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdateTicketType([FromRoute] string id, [FromBody] UpdateTicketType updateTicketType, CancellationToken cancellationToken)
     {
         var ticket = await ticketRepository.Get(WebUtility.UrlDecode(id), cancellationToken);
         if(ticket == null)

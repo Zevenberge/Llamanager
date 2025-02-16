@@ -50,6 +50,7 @@ app.UseCors(policy =>
     policy
         .SetIsOriginAllowed(origin => origin == app.Configuration.Frontend())
         .AllowAnyHeader()
+        .AllowAnyMethod()
 );
 app.UseTransactions();
 app.MapControllers();
