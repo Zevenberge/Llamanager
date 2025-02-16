@@ -4,6 +4,7 @@
 	import { Icon } from '@smui/button';
 	import DataTable, { Body, Cell, Head, Row } from '@smui/data-table';
 	import LinearProgress from '@smui/linear-progress';
+	import LlamaTicketTypeIcon from "./LlamaTicketTypeIcon.svelte";
 
     let { loaded, tickets } : { loaded: boolean, tickets: LlamaTicket[] } = $props();
 </script>
@@ -20,15 +21,7 @@
 		{#each tickets as ticket (ticket.id)}
 			<Row>
 				<Cell>
-					{#if ticket.ticketType == 'Bug'}
-						<Icon tag="svg" viewBox="0 0 24 24">
-							<path fill="currentColor" d={mdiBugOutline} />
-						</Icon>
-					{:else}
-						<Icon tag="svg" viewBox="0 0 24 24">
-							<path fill="currentColor" d={mdiStarCircleOutline} />
-						</Icon>
-					{/if}
+					<LlamaTicketTypeIcon ticketType={ticket.ticketType} />	
 				</Cell>
 				<Cell numeric>{ticket.number}</Cell>
 				<Cell>{ticket.summary}</Cell>

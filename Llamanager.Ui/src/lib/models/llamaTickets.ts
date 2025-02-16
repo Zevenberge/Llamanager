@@ -13,6 +13,8 @@ export type LlamaTicket = {
     acceptanceCriteria: string | null;
 }
 
+export type CreateLlamaTicket = Omit<LlamaTicket, 'id' | 'number'>;
+
 export async function getAllLlamaTickets() {
     const result = await fetchBackend(PATH);
     if(result.ok) {

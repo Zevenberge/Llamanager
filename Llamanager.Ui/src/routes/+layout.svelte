@@ -4,22 +4,23 @@
 	import { Icon } from '@smui/button';
 	import List, { Item, Text, Graphic, Separator } from '@smui/list';
     import { mdiClipboardCheckMultipleOutline, mdiPackageVariantClosed, mdiRobotConfusedOutline, mdiHomeOutline } from "@mdi/js"
-	import { getTicketSource, SELF_CONTAINED } from '$lib/models/ticketSource';
-	import { onMount } from 'svelte';
+	import { SELF_CONTAINED } from '$lib/models/ticketSource';
+	import { exactRoute, isInSection, type RouteComparer } from '$lib/models/routing.js';
 	let { data, children } = $props();
     type NavigationEntry = {
         description: string;
         icon: string;
         path: string;
+		isActive: RouteComparer;
         requireSeperator?: boolean;
 		ignore?: boolean;
     };
 
     const navigations: NavigationEntry[] = [
-        { description: "Home", icon: mdiHomeOutline, path: "/", requireSeperator: true },
-        { description: "Tickets", icon: mdiClipboardCheckMultipleOutline, path: "/tickets", ignore: data.source != SELF_CONTAINED },
-        { description: "Releases", icon: mdiPackageVariantClosed, path: "/releases" },
-        { description: "Agent", icon: mdiRobotConfusedOutline, path: "/agent", requireSeperator: true },
+        { description: "Home", icon: mdiHomeOutline, path: "/", isActive: exactRoute, requireSeperator: true },
+        { description: "Tickets", icon: mdiClipboardCheckMultipleOutline, path: "/tickets", isActive: isInSection, ignore: data.source != SELF_CONTAINED },
+        { description: "Releases", icon: mdiPackageVariantClosed, path: "/releases", isActive: isInSection },
+        { description: "Agent", icon: mdiRobotConfusedOutline, path: "/agent", isActive: isInSection, requireSeperator: true },
     ];
 </script>
 
@@ -35,7 +36,7 @@
                     {#if nav.requireSeperator }
                         <Separator/>
                     {/if}
-                    <Item href={nav.path} activated={page.url.pathname === nav.path}>
+                    <Item href={nav.path} activated={nav.isActive(nav.path, page.url.pathname)}>
                         <Graphic aria-hidden>
                             <Icon tag="svg" viewBox="0 0 24 24">
                                 <path fill="currentColor" d={nav.icon} />

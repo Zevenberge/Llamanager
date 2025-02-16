@@ -1,0 +1,46 @@
+.mdc-fab {
+    position: fixed;
+    left: 95vw;
+    top: 90vh;
+}
+
+.mdc-text-field.actually-not-a-text-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.mdc-text-field.actually-not-a-text-field .mdc-floating-label {
+    position: unset;
+    font-size: 75%;
+    transform: none;
+}
+
+.mdc-text-field--textarea {
+    min-height: 100px;
+    max-height: 500px;
+}
+
+.short-radio-list {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.short-radio-list label {
+    margin-left: 0.6em;
+    display: flex;
+    flex-direction: row;
+    gap: 0.3em;
+    justify-content: center;
+    align-items: center;
+}
+
+.short-radio-list label svg {
+    flex-shrink: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}

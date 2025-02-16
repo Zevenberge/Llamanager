@@ -1,6 +1,8 @@
 <script lang="ts">
 	import LlamaTicketList from '$lib/components/llama-tickets/LlamaTicketList.svelte';
+	import NewIcon from '$lib/components/NewIcon.svelte';
 	import { getAllLlamaTickets, type LlamaTicket } from '$lib/models/llamaTickets';
+	import Fab from '@smui/fab';
 	
 	import { onMount } from 'svelte';
 
@@ -19,3 +21,6 @@
 
 <LlamaTicketList loaded={loaded} tickets={tickets} />
 
+<Fab color="primary" href="/tickets/new">
+	<NewIcon/>
+</Fab>
