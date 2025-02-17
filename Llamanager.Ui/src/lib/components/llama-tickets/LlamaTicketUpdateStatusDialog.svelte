@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Dialog, { Title, Content, Actions } from '@smui/dialog';
+	import Dialog, { Title, Content, Actions, InitialFocus } from '@smui/dialog';
 	import Button, { Label } from '@smui/button';
 	import List, { Item, Graphic, Text } from '@smui/list';
 	import Radio from '@smui/radio';
@@ -30,7 +30,7 @@
 	aria-describedby="list-selection-content"
 	onSMUIDialogClosed={onClosed}
 >
-	<Title id="list-selection-title">Dialog Title</Title>
+	<Title id="list-selection-title">Update status</Title>
 	<Content id="list-selection-content">
 		<List radioList>
 			{#each statusses as possibleStatus}
@@ -44,7 +44,7 @@
 		</List>
 	</Content>
 	<Actions>
-		<Button>
+		<Button color="secondary">
 			<Label>Cancel</Label>
 		</Button>
 		<Button action="submit" color="primary">

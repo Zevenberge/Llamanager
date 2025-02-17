@@ -4,6 +4,7 @@
 	import LlamaTicketStatusLight from '$lib/components/llama-tickets/LlamaTicketStatusLight.svelte';
 	import LlamaTicketTypeIcon from '$lib/components/llama-tickets/LlamaTicketTypeIcon.svelte';
 	import LlamaTicketUpdateStatusDialog from '$lib/components/llama-tickets/LlamaTicketUpdateStatusDialog.svelte';
+	import LlamaTicketUpdateTypeDialog from '$lib/components/llama-tickets/LlamaTicketUpdateTypeDialog.svelte';
 	import { LLAMA_TICKETS_FRONT_END_PATH } from '$lib/models/llamaTickets.js';
 	import Fab from '@smui/fab';
 	import IconButton from '@smui/icon-button';
@@ -13,12 +14,17 @@
 	let menu: Menu;
 
 	let updateStatus = $state(false);
+	let updateType = $state(false);
 </script>
 
 <div class="aligned-line front-and-back">
 	<h1 class="aligned-line">
-		<LlamaTicketTypeIcon ticketType={data.ticketType} class="compact-icon" />
-		<IconButton onclick={() => updateStatus = true}><LlamaTicketStatusLight status={data.status} /></IconButton>
+		<IconButton onclick={() => updateType = true}>
+			<LlamaTicketTypeIcon ticketType={data.ticketType} class="compact-icon" />
+		</IconButton>
+		<IconButton onclick={() => updateStatus = true}>
+			<LlamaTicketStatusLight status={data.status} />
+		</IconButton>
 		<span>{data.number} - {data.summary}</span>
 	</h1>
 	<div>
@@ -30,7 +36,7 @@
 				<Item onSMUIAction={() => { updateStatus = true }}>
 					<Text>Update status</Text>
 				</Item>
-				<Item onSMUIAction={() => {}}>
+				<Item onSMUIAction={() => { updateType = true }}>
 					<Text>Change ticket type</Text>
 				</Item>
 				<Separator />
@@ -54,3 +60,4 @@
 </Fab>
 
 <LlamaTicketUpdateStatusDialog id={data.id} status={data.status} bind:open={updateStatus}/>
+<LlamaTicketUpdateTypeDialog id={data.id} type={data.ticketType} bind:open={updateType} />
