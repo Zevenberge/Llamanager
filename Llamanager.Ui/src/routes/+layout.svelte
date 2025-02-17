@@ -7,6 +7,7 @@
 	import { SELF_CONTAINED } from '$lib/models/ticketSource';
 	import { exactRoute, isInSection, type RouteComparer } from '$lib/models/routing.js';
 	import { LLAMA_TICKETS_FRONT_END_PATH } from '$lib/models/llamaTickets.js';
+	import Notifications from '$lib/components/Notifications.svelte';
 	let { data, children } = $props();
     type NavigationEntry = {
         description: string;
@@ -56,6 +57,8 @@
 		</main>
 	</AppContent>
 </div>
+
+<Notifications/>
 
 <style>
 	/* These classes are only needed because the

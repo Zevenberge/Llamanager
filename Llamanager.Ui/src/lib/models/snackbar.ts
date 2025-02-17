@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-type SnackbarProps = {
+export type SnackbarProps = {
     message: string;
     type: 'success' | 'error'
 };

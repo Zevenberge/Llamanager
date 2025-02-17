@@ -65,3 +65,14 @@ form {
     flex-direction: column;
     gap: 1em;
 }
+
+.sb-success .mdc-snackbar__surface {
+    background-color: green;
+}
+
+.sb-error .mdc-snackbar__surface {
+    background-color: red;
+}
+.sb .mdc-snackbar__label {
+    color: white;
+}
