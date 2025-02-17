@@ -1,5 +1,5 @@
 import { goto } from "$app/navigation";
-import { fetchBackend, post, put } from "$lib/backend";
+import { del, fetchBackend, post, put } from "$lib/backend";
 
 const PATH = "/llama/ticket"
 
@@ -72,6 +72,18 @@ export async function updateLlamaTicketType(id: string, type: LlamaTicketType) {
         return await result.json() as LlamaTicket;
     }
     throw new Error("Could not update status");
+}
+
+export async function deleteLlamaTicket(id: string) {
+    const result = await fetchBackend(`${PATH}/${encodeURIComponent(id)}`, del());
+    if(result.ok) {
+        return;
+    }
+    throw new Error("Could not delete ticket");
+}
+
+export function navigateToLlamaTicketOverview() {
+    goto(LLAMA_TICKETS_FRONT_END_PATH, { invalidateAll: true });
 }
 
 export function navigateToLlamaTicket(ticket: LlamaTicket) {

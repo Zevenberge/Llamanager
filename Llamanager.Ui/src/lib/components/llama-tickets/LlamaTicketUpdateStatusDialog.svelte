@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Dialog, { Title, Content, Actions, InitialFocus } from '@smui/dialog';
+	import Dialog, { Title, Content, Actions } from '@smui/dialog';
 	import Button, { Label } from '@smui/button';
 	import List, { Item, Graphic, Text } from '@smui/list';
 	import Radio from '@smui/radio';

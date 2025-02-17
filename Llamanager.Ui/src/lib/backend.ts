@@ -17,3 +17,4 @@ function json(method: string) {
 
 export const post = json('post');
 export const put = json('put');
+export const del = () => ({ method: "delete"});

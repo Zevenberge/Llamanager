@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ActionsIcon from '$lib/components/ActionsIcon.svelte';
 	import EditIcon from '$lib/components/EditIcon.svelte';
+	import LlamaTicketDeleteDialog from '$lib/components/llama-tickets/LlamaTicketDeleteDialog.svelte';
 	import LlamaTicketStatusLight from '$lib/components/llama-tickets/LlamaTicketStatusLight.svelte';
 	import LlamaTicketTypeIcon from '$lib/components/llama-tickets/LlamaTicketTypeIcon.svelte';
 	import LlamaTicketUpdateStatusDialog from '$lib/components/llama-tickets/LlamaTicketUpdateStatusDialog.svelte';
@@ -15,6 +16,7 @@
 
 	let updateStatus = $state(false);
 	let updateType = $state(false);
+	let deleteTicket = $state(false);
 </script>
 
 <div class="aligned-line front-and-back">
@@ -40,7 +42,7 @@
 					<Text>Change ticket type</Text>
 				</Item>
 				<Separator />
-				<Item onSMUIAction={() => {}}>
+				<Item onSMUIAction={() => { deleteTicket = true }}>
 					<Text>Delete</Text>
 				</Item>
 			</List>
@@ -61,3 +63,4 @@
 
 <LlamaTicketUpdateStatusDialog id={data.id} status={data.status} bind:open={updateStatus}/>
 <LlamaTicketUpdateTypeDialog id={data.id} type={data.ticketType} bind:open={updateType} />
+<LlamaTicketDeleteDialog {...data} bind:open={deleteTicket} />
