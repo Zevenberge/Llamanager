@@ -1,15 +1,12 @@
 <script lang="ts">
-	import type { CreateLlamaTicket, LlamaTicketType } from '$lib/models/llamaTickets';
-	import FormField from '@smui/form-field';
-	import Radio from '@smui/radio';
+	import type { CreateLlamaTicket } from '$lib/models/llamaTickets';
 	import TextField from '@smui/textfield';
 
 	import HelperText from '@smui/textfield/helper-text';
-	import LlamaTicketTypeIcon from './LlamaTicketTypeIcon.svelte';
 	import MdiLabel from '../MdiLabel.svelte';
+	import LlamaTicketTypeSelector from './LlamaTicketTypeSelector.svelte';
 
 	let { ticket = $bindable() }: { ticket: CreateLlamaTicket } = $props();
-	const ticketTypeOptions: LlamaTicketType[] = ['Rfc', 'Bug'];
 </script>
 
 <TextField label="Summary" bind:value={ticket.summary} required variant="outlined">
@@ -19,19 +16,7 @@
 </TextField>
 		
 <MdiLabel text="Ticket type">
-<div class="short-radio-list">
-	{#each ticketTypeOptions as option}
-		<FormField>
-			<Radio bind:group={ticket.type} value={option} />
-			{#snippet label()}
-				<LlamaTicketTypeIcon ticketType={option} />
-				<span>
-					{option}
-				</span>
-			{/snippet}
-		</FormField>
-	{/each}
-</div>
+	<LlamaTicketTypeSelector bind:type={ticket.type} />
 </MdiLabel>
 <TextField label="Description" bind:value={ticket.description} textarea>
 	{#snippet helper()}

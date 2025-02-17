@@ -2,7 +2,7 @@
 	import LlamaTicketUpdate from "$lib/components/llama-tickets/LlamaTicketUpdate.svelte";
 	import SaveIcon from "$lib/components/SaveIcon.svelte";
 	import { navigateToLlamaTicket, updateLlamaTicket, type UpdateLlamaTicket } from "$lib/models/llamaTickets";
-	import { currentNotification } from "$lib/models/snackbar";
+	import { wrap } from "$lib/models/snackbar";
 	import Fab from "@smui/fab";
 
     let { data } = $props();
@@ -17,21 +17,15 @@
 
     async function save(e: SubmitEvent) {
         e.preventDefault();
-        try {
-            inProgress = true;
-            const createdTicket = await updateLlamaTicket(data.id, ticket);
-            currentNotification.set({
-                message: "Successfully updated ticket",
-                type: "success"
-            });
-            navigateToLlamaTicket(createdTicket);
-        } catch {
-            currentNotification.set({ 
-                message: "Failed to update ticket",
-                type: "error"
-            });
-        } finally {
-            inProgress = false;
+        inProgress = true;
+        const result = await wrap({
+            action: () => updateLlamaTicket(data.id, ticket),
+            onSuccess: "Successfully updated ticket",
+            onFailure: "Failed to update ticket",
+        });
+        inProgress = false;
+        if(result.success) {
+            navigateToLlamaTicket(result.value);
         }
     }
 </script>

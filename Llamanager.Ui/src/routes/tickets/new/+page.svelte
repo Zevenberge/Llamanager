@@ -2,7 +2,7 @@
 	import LlamaTicketCreate from "$lib/components/llama-tickets/LlamaTicketCreate.svelte";
 	import SaveIcon from "$lib/components/SaveIcon.svelte";
 	import { createLlamaTicket, navigateToLlamaTicket, type CreateLlamaTicket } from "$lib/models/llamaTickets";
-	import { currentNotification } from "$lib/models/snackbar";
+	import { wrap } from "$lib/models/snackbar";
 	import Fab from "@smui/fab";
 
     let ticket: CreateLlamaTicket = {
@@ -16,21 +16,15 @@
 
     async function save(e: SubmitEvent) {
         e.preventDefault();
-        try {
-            inProgress = true;
-            const createdTicket = await createLlamaTicket(ticket);
-            currentNotification.set({
-                message: "Successfully created ticket",
-                type: "success"
-            });
-            navigateToLlamaTicket(createdTicket);
-        } catch {
-            currentNotification.set({ 
-                message: "Failed to create ticket",
-                type: "error"
-            });
-        } finally {
-            inProgress = false;
+        inProgress = true;
+        const result = await wrap({
+            action: () => createLlamaTicket(ticket),
+            onSuccess: "Successfully created ticket",
+            onFailure: "Failed to create ticket",
+        });
+        inProgress = false;
+        if(result.success) {
+            navigateToLlamaTicket(result.value);
         }
     }
 </script>

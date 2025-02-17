@@ -56,9 +56,26 @@ export async function updateLlamaTicket(id: string, ticket: UpdateLlamaTicket) {
     if(result.ok) {
         return await result.json() as LlamaTicket;
     }
-    throw new Error("Could not create ticket");
+    throw new Error("Could not update ticket");
+}
+
+export async function updateLlamaTicketStatus(id: string, status: LlamaTicketStatus) {
+    const result = await fetchBackend(`${PATH}/${encodeURIComponent(id)}/status`, put({ status }));
+    if(result.ok) {
+        return await result.json() as LlamaTicket;
+    }
+    throw new Error("Could not update status");
+}
+export async function updateLlamaTicketType(id: string, type: LlamaTicketType) {
+    const result = await fetchBackend(`${PATH}/${encodeURIComponent(id)}/type`, put({ type }));
+    if(result.ok) {
+        return await result.json() as LlamaTicket;
+    }
+    throw new Error("Could not update status");
 }
 
 export function navigateToLlamaTicket(ticket: LlamaTicket) {
-    goto(`${LLAMA_TICKETS_FRONT_END_PATH}/${encodeURIComponent(ticket.id)}`);
+    goto(`${LLAMA_TICKETS_FRONT_END_PATH}/${encodeURIComponent(ticket.id)}`, {
+        invalidateAll: true,
+    });
 }
