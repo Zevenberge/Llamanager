@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Llamanager.Tickets.Abstract
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Llamanager.Tickets.SelfContained", "Llamanager.Tickets.SelfContained\Llamanager.Tickets.SelfContained.csproj", "{E087FF4C-C38D-4584-9072-25A5E8DC381C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Llamanager.Releasing", "Llamanager.Releasing\Llamanager.Releasing.csproj", "{14901D2F-588D-4AD0-B216-6A0F83233F15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{E087FF4C-C38D-4584-9072-25A5E8DC381C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E087FF4C-C38D-4584-9072-25A5E8DC381C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E087FF4C-C38D-4584-9072-25A5E8DC381C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14901D2F-588D-4AD0-B216-6A0F83233F15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14901D2F-588D-4AD0-B216-6A0F83233F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14901D2F-588D-4AD0-B216-6A0F83233F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14901D2F-588D-4AD0-B216-6A0F83233F15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
