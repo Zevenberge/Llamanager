@@ -1,5 +1,4 @@
 using System.Net;
-using System.Text.Encodings.Web;
 using Llamanager.Tickets.SelfContained.Domain;
 using Llamanager.Tickets.SelfContained.Models;
 using Llamanager.Tickets.SelfContained.Repository;

@@ -4,15 +4,6 @@ using Raven.Client.Documents.Session;
 
 namespace Llamanager.Tickets.SelfContained.Repository;
 
-public interface ILlamaTicketRepository
-{
-    Task Add(LlamaTicket ticket, CancellationToken cancellationToken);
-    Task Delete(LlamaTicket ticket, CancellationToken cancellationToken);
-    Task<LlamaTicket?> Get(string id, CancellationToken cancellationToken);
-    Task<List<LlamaTicket>> GetAll(CancellationToken cancellationToken);
-    Task Update(LlamaTicket ticket, CancellationToken cancellationToken);
-}
-
 internal class LlamaTicketRepository(IAsyncDocumentSession session) : ILlamaTicketRepository
 {
     public async Task<LlamaTicket?> Get(string id, CancellationToken cancellationToken)
